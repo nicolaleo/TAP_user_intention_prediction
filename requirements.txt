@@ -4,3 +4,6 @@ scikit-learn == 1.6.1 # notebook 03, 04
 matplotlib == 3.10.0  # notebook 01
 pandas >= 1.5.3       # all notebooks
 dataprep == 0.4.5 # notebook 01  
+accelerate == 1.3.0  # notebook 05. An alternative transformers[torch]
+datasets ==  3.2.0 # notebook 05
+

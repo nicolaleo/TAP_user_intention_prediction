@@ -17,7 +17,11 @@ A step by step methodology oriented to clarity and pragmatism
 
 -[01_dataset_analysis_and_preparation](01_dataset_analysis_and_preparation.ipynb) EDA analysis and some preprocessing steps 
 
--[02_text_embedding_creation_and_representation](02_text_embedding_creation_and_representation.ipynb) text embedding creation and UMAP representation
+-[02_text_embedding_creation_and_representation](02_text_embedding_creation_and_representation.ipynb) text embedding creation (sentence-transformers library) and UMAP representation
+
+-[02_text_embedding_creation_and_representation_trasformers](02_text_embedding_creation_and_representation_transformers.ipynb) text embedding creation (transformers library) and UMAP representation
+
+-[02_text_embedding_creation_and_representation_finetuned](02_text_embedding_creation_and_representation_finetuned.ipynb) text embedding creation (transformers library) and UMAP representation using e finetuned model
 
 -[03_dataset_manipulation_for_multilabel_classification](03_dataset_manipulation_for_multilabel_classification.ipynb) produce a dataset suitable for a multilabel classification task 
 
@@ -26,7 +30,7 @@ Starting from a baseline model the aim of the project is to build AI models of i
 - **Using only the textual representation of the rule  (text embeddings as features) and add a custom classifier on top**
   - [04_train_features_extractor](04_train_features_extractor.ipynb) train a classifier on top the embedding representation
   - [enhanced text] add other dataset columns to the "name" column
-  - [embedding_model_finetuning] finetune the base embedding model with Contrastive Loss (class labels derived by the "goal")
+  - [05_embedding_model_finetuning](05_embedding_model_finetuning.ipynb) finetune the base embedding model with a Contrastive Loss (using the "goal" attribute for example). Only the simplest approach (anchor, positive) + MultipleNegativesRankingLoss implemented and evaluated
 - **Model Finetuning**  
    - [Only last layer]
    - [Some layers]
@@ -46,6 +50,7 @@ Starting from a baseline model the aim of the project is to build AI models of i
 |  1   |  Features extractor  |  bert-base-uncased + Logistic Regression   |  85.38%   |     0.92        |      0.94       |     52.60%       |    0.66      |     0.65     |
 |  2   |  Features extractor  |  all-mpnet-base-v2 + Logistic Regression   |  73.59%   |     0.83        |      0.81       |     57.81%       |    0.71      |     0.69     |
 |  3   |  Features extractor  |  ModernBERT-base + Logistic Regression   |  79.02%   |     0.88        |      0.88       |     47.14%       |    0.62      |     0.56     |
+|  4   |  Features extractor  |  all-mpnet-base-v2 finetuned + Logistic Regression   |  71.76%   |     0.82        |      0.67       |     65.89%       |    0.77      |     0.64     |
 
 
 # UMAP 2d representations
@@ -58,6 +63,11 @@ Starting from a baseline model the aim of the project is to build AI models of i
 ### ModernBERT-base
 <img src="figures/modernBert_base_umap_2d.png" width=1000>
 
+### all-mpnet-base-v2 finetuned (the best clustered ones so far)
+<img src="figures/all-mpnet-base-v2_finetuned_umap_2d.png" width=1000>
+
 # Comments
 ## Features extractor Approach
-From the representation of UMAP embeddings it is evident how the all-mpnet-base-v2 model is able to group in a stronger way textual representations of rules with the same goal. This better "clustered representation" helps the cascaded classifier which therefore obtains better results (test-set)
+From the representation of UMAP embeddings it is evident how the all-mpnet-base-v2 model is able to group in a stronger way textual representations of rules with the same goal. This better "clustered representation" helps the cascaded classifier which therefore obtains better results (test-set).
+
+The same logic is followed by the all-mpnet-base-v2-finetuned model which has better performance. It is the best in its category so far. It is clear from the UMAP representation and metrics results that the embedding finetuning step with the simple MultipleNegativesRankingLoss is able to improve the model overall performance.
