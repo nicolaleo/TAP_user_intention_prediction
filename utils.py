@@ -1,10 +1,11 @@
-import plotly.graph_objects as go
+
 import plotly.express as px
 import numpy as np
 import matplotlib.pyplot as plt
 import umap
 import time
 import os
+import torch
 
 
 def create_folder(root_path, directory_separator="/", next_path="next"):
@@ -80,3 +81,11 @@ def umap_2d_scatter_chart(df, model_embedding_name):
     # Show the plot
     # fig.show()
     fig.write_html("out/umap2d_with_class_" + model_embedding_name + ".html")
+
+
+def get_embedding(text, tokenizer, model):
+    inputs = tokenizer(text, return_tensors='pt', truncation=True, padding=True)
+    model.eval()
+    with torch.no_grad():
+        outputs = model(**inputs)
+        return outputs.last_hidden_state.mean(dim=1).squeeze().numpy() # mean of the words embeddings as the representative for the sentence

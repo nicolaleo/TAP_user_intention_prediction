@@ -44,5 +44,20 @@ Starting from a baseline model the aim of the project is to build AI models of i
 |      | Approach   | Model    | Train Accuracy | Train F1-micro | Train F1-macro | Test Accuracy | Test F1-micro | Test F1-macro | 
 | ---- | -----------| -------- | -------------- | -------------- | -------------- | --------------| ------------- | ------------- | 
 |  1   |  Features extractor  |  bert-base-uncased + Logistic Regression   |  85.38%   |     0.92        |      0.94       |     52.60%       |    0.66      |     0.65     |
+|  2   |  Features extractor  |  all-mpnet-base-v2 + Logistic Regression   |  73.59%   |     0.83        |      0.81       |     57.81%       |    0.71      |     0.69     |
+|  3   |  Features extractor  |  ModernBERT-base + Logistic Regression   |  79.02%   |     0.88        |      0.88       |     47.14%       |    0.62      |     0.56     |
 
 
+# UMAP 2d representations
+### bert-base-uncased
+<img src="figures/bert_uncased_umap_2d.png" width=1000>
+
+### all-mpnet-base-v2
+<img src="figures/all-mpnet-base-v2_umap_2d.png" width=1000>
+
+### ModernBERT-base
+<img src="figures/modernBert_base_umap_2d.png" width=1000>
+
+# Comments
+## Features extractor Approach
+From the representation of UMAP embeddings it is evident how the all-mpnet-base-v2 model is able to group in a stronger way textual representations of rules with the same goal. This better "clustered representation" helps the cascaded classifier which therefore obtains better results (test-set)
