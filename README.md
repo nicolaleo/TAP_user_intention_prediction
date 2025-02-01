@@ -36,7 +36,7 @@ Starting from a baseline model the aim of the project is to build AI models of i
    - [Some layers]
    - [PEF method eg LORA]
 - **Decoder style LLM classificator**   
-    - [Use prompting techniques to test an LLM as a classificator] Llama models for example
+    - [06_LLM_classificator](06_LLM_classificator.ipynb) use prompting techniques to test an LLM as a classificator - Llamav3.2 1 billion parameter model 
     - [Work with encoder style representation and decoder style] try to merge the two approaches
 - **Graph Neural Network modeling**
     - [Create the graph representation and apply a GNN approach on this] extract the graph representation embeddings of the set of rules
