@@ -84,6 +84,38 @@ def query_model(
     return response_data
 
 
+def query_model_embed(
+    input="",
+    model="llama3.2",
+    url="http://localhost:11434/api/embed",
+):
+
+    data = {"model": model, "input": input}
+
+    # Convert the dictionary to a JSON formatted string and encode it to bytes
+    payload = json.dumps(data).encode("utf-8")
+
+    # Create a request object, setting the method to POST and adding necessary headers
+    request = urllib.request.Request(url, data=payload, method="POST")
+    request.add_header("Content-Type", "application/json")
+
+    # Send the request and capture the response
+    response_data = ""
+    with urllib.request.urlopen(request) as response:
+        # Read and decode the response
+        while True:
+            line = response.readline().decode("utf-8")
+            if not line:
+                break
+            response_json = json.loads(line)
+
+            # print("response_json:",response_json)
+
+            response_data = response_json["embeddings"][0]
+
+    return response_data
+
+
 def built_messages(
     user_prompt_custom="", system_prompt_content="", user_prompt_static=""
 ):
@@ -93,6 +125,3 @@ def built_messages(
         {"role": "user", "content": user_prompt_static + user_prompt_custom},
     ]
     return messages
-
-
-
