@@ -41,6 +41,7 @@ Starting from a baseline model the aim of the project is to build AI models of i
     - [06_LLM_classificator](06_LLM_classificator.ipynb) use prompting techniques to test an LLM as a classificator - Llamav3.2 1 billion parameter model 
     - [Work with encoder style representation and decoder style] try to merge the two approaches
 - **Graph Neural Network modeling**
+    - [07_kg_creation](07_kg_creation.ipynb) create the kg representation for the dataset [the generated graph file](out/IFTTT_graph.json)
     - [Create the graph representation and apply a GNN approach on this] extract the graph representation embeddings of the set of rules
 - **Multi-view representation learning**   
     - [Representation Fusion] Merge different representation
